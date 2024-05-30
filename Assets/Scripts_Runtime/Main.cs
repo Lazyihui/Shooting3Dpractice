@@ -14,10 +14,18 @@ public class Main : MonoBehaviour {
         ModuleAssets.Load(ctx.assetsContext);
         Debug.Log("Main Awake");
 
+        Debug.Assert(ctx != null, "ctx is null");
+        ctx.Inject();
 
+        Game_Business.New_Game(ctx.gameContext);
+        // === Inject===
     }
     // Update is called once per frame
     void Update() {
+
+
+
+
 
     }
 
