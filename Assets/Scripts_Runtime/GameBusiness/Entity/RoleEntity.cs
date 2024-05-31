@@ -12,4 +12,20 @@ public class RoleEntity : MonoBehaviour {
     public RoleEntity() { }
     public void Ctor() { }
 
+    public void Move(Vector2 moveAxis, float speed, float dt) {
+
+        // Vector2 oldVelocity = rb.velocity;
+        // oldVelocity = moveAxis * speed;
+        // rb.velocity = oldVelocity;
+
+        Vector3 velo = rb.velocity;
+        float oldY = velo.y;
+        Vector3 moveDir = new Vector3(moveAxis.x, 0, moveAxis.y);
+        moveDir.Normalize();
+        //  记 veloctity
+        velo = moveDir * speed;
+        velo.y = oldY;
+        rb.velocity = velo;
+    }
+
 }

@@ -5,9 +5,6 @@ using UnityEngine;
 public static class RoleDomain {
 
     public static RoleEntity Spawn(GameContext ctx) {  
-        Debug.Assert(ctx != null, "ctx is null");
-        Debug.Assert(ctx.assetsContext != null, "ctx.assetsContext is null");
-        Debug.Assert(ctx.roleRespository != null, "ctx.roleRespository is null");
 
         bool has = ctx.assetsContext.TryGetEntity("Role_Entity", out GameObject prefab);
 
@@ -19,10 +16,14 @@ public static class RoleDomain {
         RoleEntity role = GameObject.Instantiate(prefab).GetComponent<RoleEntity>();
 
         role.Ctor(); 
-
+        role.id = ctx.roleID++;
         ctx.roleRespository.Add(role);
         return role;
 
     }
 
+    public static void Move(RoleEntity role, Vector2 moveAxis, float speed, float dt) {
+        Debug.Log("Move");
+        role.Move(moveAxis, speed, dt);
+    }
 }

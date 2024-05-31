@@ -5,7 +5,9 @@ public static class Game_Business {
 
     public static void New_Game(GameContext ctx) {
 
-        RoleDomain.Spawn(ctx);
+        RoleEntity role = RoleDomain.Spawn(ctx);
+
+        role.id = ctx.gameEntity.roleID;
 
     }
 
@@ -47,7 +49,17 @@ public static class Game_Business {
     }
 
 
-    static void LogicFix(GameContext ctx, float dt) { }
+    static void LogicFix(GameContext ctx, float dt) {
+        ctx.roleRespository.Foreach((RoleEntity role) => {
+            if (role.id == ctx.gameEntity.roleID) {
+
+                RoleDomain.Move(role, ctx.moduleInput.moveAxis, 5, dt);
+
+            }
+        });
+
+
+    }
 
     static void LateTick(GameContext ctx, float dt) {
 
