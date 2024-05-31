@@ -4,10 +4,12 @@ using UnityEngine;
 public class GameContext {
 
     public GameEntity gameEntity;
-// === repository ===
+    // === repository ===
     public RoleRespository roleRespository;
-// === Inject ===
+    // === Inject ===
     public AssetsContext assetsContext;
+
+    public ModuleInput moduleInput;
 
 
     public GameContext() {
@@ -16,7 +18,8 @@ public class GameContext {
         roleRespository = new RoleRespository();
     }
 
-    public void Inject(AssetsContext assetsContext) {
+    public void Inject(AssetsContext assetsContext, ModuleInput moduleInput) {
         this.assetsContext = assetsContext;
+        this.moduleInput = moduleInput;
     }
 }
