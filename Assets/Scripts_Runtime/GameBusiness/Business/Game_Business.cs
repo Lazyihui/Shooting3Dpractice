@@ -54,6 +54,7 @@ public static class Game_Business {
             if (role.id == ctx.gameEntity.roleID) {
 
                 RoleDomain.Move(role, ctx.moduleInput.moveAxis, 5, dt);
+                RoleDomain.Rotate(ctx.mainCamera,role, ctx.moduleInput.mousePos, dt);
 
             }
         });

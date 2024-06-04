@@ -5,7 +5,9 @@ public class ModuleInput {
 
     public Vector2 moveAxis;
 
+    public Vector3 mouseFaceDir;
 
+    public Vector3 mousePos;
 
     public ModuleInput() {
     }
@@ -28,5 +30,6 @@ public class ModuleInput {
         }
         this.moveAxis = move;
 
+        mousePos = Input.mousePosition;
     }
 }
