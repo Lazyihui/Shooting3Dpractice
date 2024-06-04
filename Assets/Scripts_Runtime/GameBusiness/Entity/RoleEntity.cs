@@ -28,14 +28,14 @@ public class RoleEntity : MonoBehaviour {
         rb.velocity = velo;
     }
 
-    public void Rotate(Vector3 rotateAxis, float dt) {
-        if (rotateAxis == Vector3.zero) {
-            return;
-        }
-        // Quaternion rot = Quaternion.LookRotation(rotateAxis);
-        // Debug.Log("rot:" + rot);
-        Quaternion rotate = Quaternion.Euler(rotateAxis);
-        transform.rotation = rotate;
-        Debug.Log("transform.rotation:" + transform.rotation);
-    }
+    // public void Rotate(Vector3 rotateAxis, float dt) {
+    //     if (rotateAxis == Vector3.zero) {
+    //         return;
+    //     }
+    //     Quaternion rot = Quaternion.LookRotation(rotateAxis);
+    //     // Debug.Log("rot:" + rot);
+    //     // 只需要y轴旋转
+    //     transform.rotation = Quaternion.Slerp(transform.rotation, rot, dt);
+
+    // }
 }

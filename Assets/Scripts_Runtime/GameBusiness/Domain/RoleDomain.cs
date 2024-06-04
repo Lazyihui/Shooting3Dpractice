@@ -37,10 +37,28 @@ public static class RoleDomain {
             Vector3 direction = mousePos - roleToScreen;
 
             //将目标向量长度变成1，即单位向量，这里的目的是只使用向量的方向，不需要长度，所以变成1
-            direction.Normalize();
-            direction.y = 0;
-            Debug.Log("direction:" + direction);
-            role.Rotate(direction, dt);
+            // // direction.Normalize();
+            // Debug.Log("direction:" + direction);
+            // //角色只需要在水平面上旋转
+            // // direction.y = 0;
+
+            // //将角色的前方向转换成世界坐标
+            // Vector3 roleForward = role.transform.forward;
+            // roleForward.y = 0;
+
+            // //计算角色的前方向和目标向量的夹角
+            // float angle = Vector3.SignedAngle(roleForward, direction, Vector3.up);
+
+            // //将角色的前方向转向目标向量
+            // role.transform.Rotate(Vector3.up, angle * dt * 10);
+
+            direction.z =0f;
+            //角色只需要在水平面上旋转
+            if(direction!=Vector3.zero){
+                role.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            }
+
+
         }
     }
 }
