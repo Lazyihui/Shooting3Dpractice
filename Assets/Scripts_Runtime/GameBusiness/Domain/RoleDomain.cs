@@ -61,17 +61,13 @@ public static class RoleDomain {
 
         Ray ray = camera.ScreenPointToRay(mousePos);
         Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
-
         float rayDistance;
 
         if (groupPlane.Raycast(ray, out rayDistance)) {
             Vector3 point = ray.GetPoint(rayDistance);
-            Debug.DrawLine(ray.origin, point, Color.red);
+            // Debug.DrawLine(ray.origin, point, Color.red);
             Vector3 height = new Vector3(point.x, role.transform.position.y, point.z);
-            
             role.transform.LookAt(height);
-
-
         }
 
 
@@ -85,9 +81,10 @@ public static class RoleDomain {
         float rayDistance;
 
         if (groupPlane.Raycast(ray, out rayDistance)) {
-            Vector3 targetPos = ray.GetPoint(rayDistance);
-            Vector3 direction = targetPos - role.transform.position;
+            Vector3 point = ray.GetPoint(rayDistance);
+            Vector3 direction = point - role.transform.position;
             direction.y = 0;
+            // 看不懂
             Quaternion targetRot = Quaternion.LookRotation(direction);
             role.transform.rotation = Quaternion.Slerp(role.transform.rotation, targetRot, 0.1f);
         }
