@@ -30,7 +30,7 @@ public static class RoleDomain {
 
     //     if (Input.GetMouseButton(0)) {
     //         Vector3 cameraRotationAxis = Input.mousePositionDelta;
-            
+
     //         cameraRotationAxis*=60f*dt;
 
     //         Debug.Log("cameraRotationAxis:" + cameraRotationAxis);
@@ -59,12 +59,32 @@ public static class RoleDomain {
 
     public static void Rotate(Camera camera, RoleEntity role, Vector3 mousePos, float dt) {
 
-         Ray ray = camera.ScreenPointToRay(mousePos);
+        Ray ray = camera.ScreenPointToRay(mousePos);
         Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
 
         float rayDistance;
 
-        if(groupPlane.Raycast(ray, out rayDistance)){
+        if (groupPlane.Raycast(ray, out rayDistance)) {
+            Vector3 point = ray.GetPoint(rayDistance);
+            Debug.DrawLine(ray.origin, point, Color.red);
+            Vector3 height = new Vector3(point.x, role.transform.position.y, point.z);
+            
+            role.transform.LookAt(height);
+
+
+        }
+
+
+    }
+
+    public static void Rotate1(Camera camera, RoleEntity role, Vector3 mousePos, float dt) {
+
+        Ray ray = camera.ScreenPointToRay(mousePos);
+        Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
+
+        float rayDistance;
+
+        if (groupPlane.Raycast(ray, out rayDistance)) {
             Vector3 targetPos = ray.GetPoint(rayDistance);
             Vector3 direction = targetPos - role.transform.position;
             direction.y = 0;
