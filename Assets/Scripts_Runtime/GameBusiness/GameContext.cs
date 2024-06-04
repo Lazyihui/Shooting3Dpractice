@@ -13,6 +13,8 @@ public class GameContext {
 
     public ModuleInput moduleInput;
 
+    public Camera mainCamera;
+
 
     public GameContext() {
         gameEntity = new GameEntity();
@@ -21,8 +23,9 @@ public class GameContext {
         roleID = 0;
     }
 
-    public void Inject(AssetsContext assetsContext, ModuleInput moduleInput) {
+    public void Inject(AssetsContext assetsContext, ModuleInput moduleInput, Camera mainCamera) {
         this.assetsContext = assetsContext;
         this.moduleInput = moduleInput;
+        this.mainCamera = mainCamera;
     }
 }

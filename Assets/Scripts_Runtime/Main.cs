@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Main : MonoBehaviour {
 
     Context ctx;
@@ -10,15 +11,15 @@ public class Main : MonoBehaviour {
     void Awake() {
         // === init===
         ctx = new Context();
+        Camera mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        
         // === Load===
         ModuleAssets.Load(ctx.assetsContext);
-        Debug.Log("Main Awake");
 
-        Debug.Assert(ctx != null, "ctx is null");
-        ctx.Inject();
+        // === Inject===
+        ctx.Inject(mainCamera);
 
         Game_Business.New_Game(ctx.gameContext);
-        // === Inject===
     }
     // Update is called once per frame
     void Update() {

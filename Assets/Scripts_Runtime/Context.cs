@@ -1,4 +1,4 @@
-
+using UnityEngine;
 
 public class Context {
 
@@ -8,13 +8,14 @@ public class Context {
 
     public ModuleInput moduleInput ;
 
+
     public Context() {
         assetsContext = new AssetsContext();
         gameContext = new GameContext();
         moduleInput  = new ModuleInput();
     }
 
-    public void Inject() {
-        gameContext.Inject(assetsContext,moduleInput);
+    public void Inject(Camera mainCamera) {
+        gameContext.Inject(assetsContext,moduleInput, mainCamera);
     }
 }
