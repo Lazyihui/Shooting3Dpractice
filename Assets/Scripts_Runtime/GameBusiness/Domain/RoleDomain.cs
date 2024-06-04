@@ -26,39 +26,50 @@ public static class RoleDomain {
         role.Move(moveAxis, speed, dt);
     }
 
+    // public static void Rotate(Camera camera, RoleEntity role, Vector3 mousePos, float dt) {
+
+    //     if (Input.GetMouseButton(0)) {
+    //         Vector3 cameraRotationAxis = Input.mousePositionDelta;
+            
+    //         cameraRotationAxis*=60f*dt;
+
+    //         Debug.Log("cameraRotationAxis:" + cameraRotationAxis);
+
+    //         //获取物体坐标，物体坐标是世界坐标，将其转换成屏幕坐标，和鼠标一直
+    //         Vector3 roleToScreen = camera.WorldToScreenPoint(role.transform.position);
+    //         //屏幕坐标向量相减，得到指向鼠标点的目标向量
+    //         Vector3 direction = mousePos - roleToScreen;
+
+    //         direction.Normalize();
+
+    //         Quaternion oldRot = Quaternion.Euler(direction);
+
+    //         Vector3 oldEuler = role.transform.eulerAngles;
+
+    //         Quaternion newRot = oldRot;
+    //         float targetPosX = oldEuler.x + cameraRotationAxis.y;
+
+    //         if(targetPosX>180){
+    //             targetPosX = targetPosX - 360;
+    //             Quaternion yRot = Quaternion.Euler(0, oldEuler.y + cameraRotationAxis.x, oldEuler.z);
+    //             role.transform.rotation = yRot;
+    //         }
+    //     }
+    // }
+
     public static void Rotate(Camera camera, RoleEntity role, Vector3 mousePos, float dt) {
 
-        if (Input.GetMouseButton(0)) {
+         Ray ray = camera.ScreenPointToRay(mousePos);
+        Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
 
+        float rayDistance;
 
-            //获取物体坐标，物体坐标是世界坐标，将其转换成屏幕坐标，和鼠标一直
-            Vector3 roleToScreen = camera.WorldToScreenPoint(role.transform.position);
-            //屏幕坐标向量相减，得到指向鼠标点的目标向量
-            Vector3 direction = mousePos - roleToScreen;
-
-            //将目标向量长度变成1，即单位向量，这里的目的是只使用向量的方向，不需要长度，所以变成1
-            // // direction.Normalize();
-            // Debug.Log("direction:" + direction);
-            // //角色只需要在水平面上旋转
-            // // direction.y = 0;
-
-            // //将角色的前方向转换成世界坐标
-            // Vector3 roleForward = role.transform.forward;
-            // roleForward.y = 0;
-
-            // //计算角色的前方向和目标向量的夹角
-            // float angle = Vector3.SignedAngle(roleForward, direction, Vector3.up);
-
-            // //将角色的前方向转向目标向量
-            // role.transform.Rotate(Vector3.up, angle * dt * 10);
-
-            direction.z =0f;
-            //角色只需要在水平面上旋转
-            if(direction!=Vector3.zero){
-                role.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
-            }
-
-
+        if(groupPlane.Raycast(ray, out rayDistance)){
+            Vector3 targetPos = ray.GetPoint(rayDistance);
+            Vector3 direction = targetPos - role.transform.position;
+            direction.y = 0;
+            Quaternion targetRot = Quaternion.LookRotation(direction);
+            role.transform.rotation = Quaternion.Slerp(role.transform.rotation, targetRot, 0.1f);
         }
     }
 }
