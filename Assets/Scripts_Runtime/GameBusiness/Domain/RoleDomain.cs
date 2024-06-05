@@ -16,7 +16,7 @@ public static class RoleDomain {
         RoleEntity role = GameObject.Instantiate(prefab).GetComponent<RoleEntity>();
 
         role.Ctor();
-        role.id = ctx.gameEntity.roleRecordID++;
+        role.id = ctx.roleRecordID++;
         ctx.roleRespository.Add(role);
         return role;
 
@@ -27,10 +27,10 @@ public static class RoleDomain {
     }
 
     public static void Rotate(Camera camera, RoleEntity role, Vector3 mousePos, float dt) {
-
         Ray ray = camera.ScreenPointToRay(mousePos);
         Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
         float rayDistance;
+        // Debug.DrawLine(ray.origin, ray.direction * 100, Color.red);
 
         if (groupPlane.Raycast(ray, out rayDistance)) {
             Vector3 point = ray.GetPoint(rayDistance);
