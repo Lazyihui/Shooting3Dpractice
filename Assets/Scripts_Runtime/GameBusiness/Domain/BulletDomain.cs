@@ -16,4 +16,8 @@ public static class BulletDomain {
         ctx.bulletRespository.Add(bullet);
         return bullet;
     }
+
+    public static void Move(BulletEntity bullet, float dt) {
+        bullet.Move(dt);
+    }
 }

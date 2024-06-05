@@ -9,8 +9,6 @@ public static class Game_Business {
         role.id = ctx.gameEntity.roleRecordID;
         GunEntity gun = GunDomain.Spawn(ctx, role.gunPos);
         gun.id = ctx.gameEntity.gunRecordID;
-        BulletEntity bullet = BulletDomain.Spawn(ctx, gun.bulletPos);
-        bullet.id = ctx.gameEntity.bulletRecordID;
 
     }
 
@@ -60,6 +58,18 @@ public static class Game_Business {
                 RoleDomain.Rotate(ctx.mainCamera, role, ctx.moduleInput.mousePos, dt);
 
             }
+        });
+
+        ctx.gunRespository.Foreach((GunEntity gun) => {
+            if (gun.id == ctx.gameEntity.gunRecordID) {
+
+                GunDomain.GunShootBlt(ctx, gun);
+
+            }
+        });
+
+        ctx.bulletRespository.Foreach((BulletEntity bullet) => {
+            BulletDomain.Move(bullet, dt);
         });
 
 
