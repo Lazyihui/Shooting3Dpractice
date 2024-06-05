@@ -6,6 +6,8 @@ public class RoleEntity : MonoBehaviour {
 
     [SerializeField] Rigidbody rb;
 
+    [SerializeField] public Transform gunPos;
+
     public int id;
 
 
