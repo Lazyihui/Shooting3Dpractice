@@ -10,7 +10,7 @@ public static class BulletDomain {
             return null;
         }
 
-        BulletEntity bullet = GameObject.Instantiate(prefab,pos).GetComponent<BulletEntity>();
+        BulletEntity bullet = GameObject.Instantiate(prefab,pos.position,pos.rotation).GetComponent<BulletEntity>();
         bullet.Ctor();
         bullet.id = ctx.gameEntity.bulletRecordID++;
         ctx.bulletRespository.Add(bullet);
