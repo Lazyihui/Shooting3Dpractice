@@ -9,10 +9,10 @@ public static class GunDomain {
             return null;
         }
 
-        GunEntity gun = GameObject.Instantiate(prefab, pos).GetComponent<GunEntity>();
+        GunEntity gun = GameObject.Instantiate(prefab, pos.position, pos.rotation).GetComponent<GunEntity>();
         gun.transform.parent = pos;
 
-        gun.Ctor(300, 1);
+        gun.Ctor(3, 1,0);
         gun.id = ctx.gameEntity.gunRecordID++;
         ctx.gunRespository.Add(gun);
         return gun;
@@ -21,11 +21,13 @@ public static class GunDomain {
     public static void GunShootBlt(GameContext ctx, GunEntity gun) {
 
         if (Input.GetMouseButtonDown(0)) {
+ 
+            // Debug.Log(Time.time + " " + gun.nextShotTime + " " + gun.msBetweenShots / 1000);
 
-            if (Time.time > gun.nextShotTime) {
+             if (Time.time > gun.nextShotTime) {
+ 
                 gun.nextShotTime = Time.time + gun.msBetweenShots / 1000;
                 BulletEntity blt = BulletDomain.Spawn(ctx, gun.bulletPos);
-
                 blt.SetSpeed(gun.muzzleVelocity);
 
                 blt.id = ctx.gameEntity.bulletRecordID++;

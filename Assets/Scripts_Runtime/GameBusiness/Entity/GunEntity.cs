@@ -8,7 +8,7 @@ public class GunEntity : MonoBehaviour {
     [SerializeField] public Transform bulletPos;
 
 
-    public float msBetweenShots; 
+    public float msBetweenShots;
 
     public float muzzleVelocity;
 
@@ -19,9 +19,10 @@ public class GunEntity : MonoBehaviour {
     public GunEntity() { }
 
 
-    public void Ctor(float msBetweenShots, float muzzleVelocity) { 
+    public void Ctor(float msBetweenShots, float muzzleVelocity, float nextShotTime) {
         this.msBetweenShots = msBetweenShots;
         this.muzzleVelocity = muzzleVelocity;
+        this.nextShotTime = nextShotTime;
     }
 
 }

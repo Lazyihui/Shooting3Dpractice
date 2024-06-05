@@ -14,6 +14,7 @@ public static class BulletDomain {
         bullet.Ctor();
         bullet.id = ctx.gameEntity.bulletRecordID++;
         ctx.bulletRespository.Add(bullet);
+
         return bullet;
     }
 
