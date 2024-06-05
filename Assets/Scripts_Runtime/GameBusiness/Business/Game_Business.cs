@@ -7,8 +7,11 @@ public static class Game_Business {
 
         RoleEntity role = RoleDomain.Spawn(ctx);
         role.id = ctx.gameEntity.roleRecordID;
-        GunEntity gun = GunDomain.Spawn(ctx,role.gunPos);
-        
+        GunEntity gun = GunDomain.Spawn(ctx, role.gunPos);
+        gun.id = ctx.gameEntity.gunRecordID;
+        BulletEntity bullet = BulletDomain.Spawn(ctx, gun.bulletPos);
+        bullet.id = ctx.gameEntity.bulletRecordID;
+
     }
 
     public static void Load_Game(GameContext ctx) {

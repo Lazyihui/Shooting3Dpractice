@@ -9,5 +9,7 @@ public class GameEntity {
     public int roleRecordID;
 
     public int  gunRecordID;
+
+    public int bulletRecordID;
     
 }

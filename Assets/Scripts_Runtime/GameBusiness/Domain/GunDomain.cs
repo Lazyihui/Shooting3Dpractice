@@ -10,6 +10,7 @@ public static class GunDomain {
         }
 
         GunEntity gun = GameObject.Instantiate(prefab,pos).GetComponent<GunEntity>();
+        gun.transform.parent = pos;
 
         gun.Ctor();
         gun.id = ctx.gameEntity.gunRecordID++;

@@ -5,6 +5,7 @@ public class GunEntity : MonoBehaviour {
 
     public int id;
 
+    [SerializeField] public Transform bulletPos;
 
     public GunEntity() { }
 

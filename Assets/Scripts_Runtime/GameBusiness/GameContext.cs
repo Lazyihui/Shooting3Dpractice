@@ -8,9 +8,13 @@ public class GameContext {
     public RoleRespository roleRespository;
 
     public GunRespository gunRespository;
+
+    public BulletRespository bulletRespository;
     public int roleRecordID;
 
     public int gunRecordID;
+
+    public int bulletRecordID;
     // === Inject ===
     public AssetsContext assetsContext;
 
@@ -24,6 +28,8 @@ public class GameContext {
 
         roleRespository = new RoleRespository();
         gunRespository = new GunRespository();
+        bulletRespository = new BulletRespository();
+        bulletRecordID = 0;
         gunRecordID = 0;
         roleRecordID = 0;
     }

@@ -8,6 +8,7 @@ public class RoleEntity : MonoBehaviour {
 
     [SerializeField] public Transform gunPos;
 
+
     public int id;
 
 
