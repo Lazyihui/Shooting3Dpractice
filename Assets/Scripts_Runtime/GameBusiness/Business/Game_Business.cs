@@ -6,9 +6,7 @@ public static class Game_Business {
     public static void New_Game(GameContext ctx) {
 
         RoleEntity role = RoleDomain.Spawn(ctx);
-
-        role.id = ctx.gameEntity.roleID;
-
+        GunEntity gun = GunDomain.Spawn(ctx);
     }
 
     public static void Load_Game(GameContext ctx) {
@@ -51,10 +49,10 @@ public static class Game_Business {
 
     static void LogicFix(GameContext ctx, float dt) {
         ctx.roleRespository.Foreach((RoleEntity role) => {
-            if (role.id == ctx.gameEntity.roleID) {
+            if (role.id == ctx.gameEntity.roleRecordID) {
 
                 RoleDomain.Move(role, ctx.moduleInput.moveAxis, 5, dt);
-                RoleDomain.Rotate(ctx.mainCamera,role, ctx.moduleInput.mousePos, dt);
+                RoleDomain.Rotate(ctx.mainCamera, role, ctx.moduleInput.mousePos, dt);
 
             }
         });

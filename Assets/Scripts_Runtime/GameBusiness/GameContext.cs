@@ -7,7 +7,10 @@ public class GameContext {
     // === repository ===
     public RoleRespository roleRespository;
 
-    public int roleID;
+    public GunRespository gunRespository;
+    public int roleRecordID;
+
+    public int gunRecordID;
     // === Inject ===
     public AssetsContext assetsContext;
 
@@ -20,7 +23,9 @@ public class GameContext {
         gameEntity = new GameEntity();
 
         roleRespository = new RoleRespository();
-        roleID = 0;
+        gunRespository = new GunRespository();
+        gunRecordID = 0;
+        roleRecordID = 0;
     }
 
     public void Inject(AssetsContext assetsContext, ModuleInput moduleInput, Camera mainCamera) {

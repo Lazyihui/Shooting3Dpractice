@@ -6,6 +6,8 @@ public class GameEntity {
 
     public float restFixTime;
 
-    public int roleID;
+    public int roleRecordID;
+
+    public int  gunRecordID;
     
 }
