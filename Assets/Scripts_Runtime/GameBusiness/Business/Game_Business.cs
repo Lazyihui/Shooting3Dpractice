@@ -10,6 +10,10 @@ public static class Game_Business {
         GunEntity gun = GunDomain.Spawn(ctx, role.gunPos);
         gun.id = ctx.gameEntity.gunRecordID;
 
+        MstEntity mst = MstDomain.Spawn(ctx);
+        mst.id = ctx.gameEntity.mstRecordID;
+
+
     }
 
     public static void Load_Game(GameContext ctx) {
