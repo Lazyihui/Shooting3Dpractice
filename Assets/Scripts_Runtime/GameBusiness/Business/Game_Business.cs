@@ -55,10 +55,11 @@ public static class Game_Business {
 
 
     static void LogicFix(GameContext ctx, float dt) {
+
         ctx.roleRespository.Foreach((RoleEntity role) => {
             if (role.id == ctx.gameEntity.roleRecordID) {
 
-                RoleDomain.Move(role, ctx.moduleInput.moveAxis, 5, dt);
+                RoleDomain.Move(role, ctx.moduleInput.moveAxis, 5);
                 RoleDomain.Rotate(ctx.mainCamera, role, ctx.moduleInput.mousePos, dt);
 
             }
@@ -74,8 +75,15 @@ public static class Game_Business {
 
         ctx.bulletRespository.Foreach((BulletEntity bullet) => {
             BulletDomain.Move(bullet, dt);
+
         });
 
+        ctx.mstRespository.Foreach((MstEntity mst) => {
+
+            RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
+
+            MstDomain.Move(mst, role, dt);
+        });
 
     }
 

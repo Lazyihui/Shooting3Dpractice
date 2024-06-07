@@ -15,7 +15,7 @@ public class RoleEntity : MonoBehaviour {
     public RoleEntity() { }
     public void Ctor() { }
 
-    public void Move(Vector2 moveAxis, float speed, float dt) {
+    public void Move(Vector2 moveAxis, float speed) {
 
         // Vector2 oldVelocity = rb.velocity;
         // oldVelocity = moveAxis * speed;

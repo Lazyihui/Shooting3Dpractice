@@ -17,8 +17,18 @@ public static class MstDomain {
         mst.id = ctx.mstRecordID++;
         ctx.mstRespository.Add(mst);
 
-        return mst; 
+        return mst;
 
     }
+
+    public static void Move(MstEntity mst, RoleEntity role, float dt) {
+        Vector3 direction = role.transform.position - mst.transform.position;
+
+        direction = direction.normalized*dt;
+
+        mst.Move(direction);
+    }
+
+
 
 }

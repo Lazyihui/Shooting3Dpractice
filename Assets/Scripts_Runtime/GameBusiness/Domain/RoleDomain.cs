@@ -22,8 +22,8 @@ public static class RoleDomain {
 
     }
 
-    public static void Move(RoleEntity role, Vector2 moveAxis, float speed, float dt) {
-        role.Move(moveAxis, speed, dt);
+    public static void Move(RoleEntity role, Vector2 moveAxis, float speed) {
+        role.Move(moveAxis, speed);
     }
 
     public static void Rotate(Camera camera, RoleEntity role, Vector3 mousePos, float dt) {
