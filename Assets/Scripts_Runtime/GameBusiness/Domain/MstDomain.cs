@@ -14,6 +14,7 @@ public static class MstDomain {
 
         MstEntity mst = GameObject.Instantiate(prefab).GetComponent<MstEntity>();
         mst.Ctor();
+        mst.moveSpeed = 0.2f;
         mst.id = ctx.mstRecordID++;
         ctx.mstRespository.Add(mst);
 
@@ -24,9 +25,9 @@ public static class MstDomain {
     public static void Move(MstEntity mst, RoleEntity role, float dt) {
         Vector3 direction = role.transform.position - mst.transform.position;
 
-        direction = direction.normalized*dt;
-
-        mst.Move(direction);
+        direction.Normalize();
+        Debug.Log("direction" + direction);
+        mst.Move(direction, dt);
     }
 
 
