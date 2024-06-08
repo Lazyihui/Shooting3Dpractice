@@ -30,6 +30,9 @@ public static class MstDomain {
         mst.Move(direction, dt);
     }
 
-
-
+    public static void Unpawn(GameContext ctx, MstEntity mst) {
+        ctx.mstRespository.Remove(mst);
+        mst.TearDown();
+    }
+    
 }

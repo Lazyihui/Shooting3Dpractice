@@ -74,7 +74,10 @@ public static class Game_Business {
         });
 
         ctx.bulletRespository.Foreach((BulletEntity bullet) => {
+
             BulletDomain.Move(bullet, dt);
+            BulletDomain.BltLapMst(ctx, bullet);
+
 
         });
 

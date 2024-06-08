@@ -5,7 +5,7 @@ using UnityEngine;
 public class MstEntity : MonoBehaviour {
     public int id;
 
-    public float moveSpeed ;
+    public float moveSpeed;
     public MstEntity() {
     }
     public void Ctor() {
@@ -16,6 +16,11 @@ public class MstEntity : MonoBehaviour {
         Vector3 pos = transform.position;
         pos += direction * moveSpeed * dt;
         transform.position = pos;
-
     }
+
+    public void TearDown() {
+        // GameObject.Destroy(gameObject);
+          this.gameObject.SetActive(true);
+    }
+
 }

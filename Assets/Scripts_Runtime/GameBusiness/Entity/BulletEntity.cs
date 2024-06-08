@@ -6,7 +6,7 @@ public class BulletEntity : MonoBehaviour {
     public int id;
 
     public float speed;
-    
+
     public BulletEntity() {
     }
 
@@ -21,4 +21,7 @@ public class BulletEntity : MonoBehaviour {
         transform.Translate(Vector3.forward * speed * dt);
     }
 
+    public void TearDown() { 
+        // GameObject.Destroy(gameObject);
+    }
 }
