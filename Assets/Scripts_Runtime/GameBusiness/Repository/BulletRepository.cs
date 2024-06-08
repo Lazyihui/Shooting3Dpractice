@@ -10,7 +10,7 @@ public class BulletRespository {
 
     public BulletRespository() {
         all = new Dictionary<int, BulletEntity>();
-        temArray = new BulletEntity[5];
+        temArray = new BulletEntity[500];
     }
 
     public void Add(BulletEntity entity) {
@@ -37,9 +37,11 @@ public class BulletRespository {
     }
 
     public void Foreach(Action<BulletEntity> action) {
+
         foreach (var item in all.Values) {
             action(item);
         }
+        
     }
 
 

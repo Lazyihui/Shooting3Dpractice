@@ -22,17 +22,16 @@ public static class GunDomain {
 
         if (Input.GetMouseButtonDown(0)) {
  
-            // Debug.Log(Time.time + " " + gun.nextShotTime + " " + gun.msBetweenShots / 1000);
 
-             if (Time.time > gun.nextShotTime) {
+            //  if (Time.time > gun.nextShotTime) {
  
-                gun.nextShotTime = Time.time + gun.msBetweenShots / 1000;
+            //     gun.nextShotTime = Time.time + gun.msBetweenShots / 1000;
                 BulletEntity blt = BulletDomain.Spawn(ctx, gun.bulletPos);
                 blt.SetSpeed(gun.muzzleVelocity);
 
                 blt.id = ctx.gameEntity.bulletRecordID++;
                 ctx.bulletRespository.Add(blt);
-            }
+            // }
         }
     }
 }
