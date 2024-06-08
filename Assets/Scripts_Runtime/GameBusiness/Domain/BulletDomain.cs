@@ -27,17 +27,31 @@ public static class BulletDomain {
         bullet.TearDown();
     }
 
+    // public static void BltLapMst(GameContext ctx, BulletEntity blt) {
+    //     ctx.mstRespository.Foreach((MstEntity mst) => {
+
+    //         float dirSqr = Vector2.SqrMagnitude(mst.transform.position - blt.transform.position);
+    //         if (dirSqr < 0.1f) {
+    //             BulletDomain.Unspawn(ctx, blt);
+    //             MstDomain.Unpawn(ctx, mst);
+    //         }else{
+    //             Debug.Log(dirSqr);
+    //         }
+
+    //     });
+    // }
     public static void BltLapMst(GameContext ctx, BulletEntity blt) {
-        ctx.mstRespository.Foreach((MstEntity mst) => {
+        int count = ctx.mstRespository.TakeAll(out MstEntity[] msts);
+        for (int i = 0; i < count; i++) {
+            MstEntity mst = msts[i];
 
             float dirSqr = Vector2.SqrMagnitude(mst.transform.position - blt.transform.position);
             if (dirSqr < 0.1f) {
                 BulletDomain.Unspawn(ctx, blt);
                 MstDomain.Unpawn(ctx, mst);
-            }else{
+            } else {
                 Debug.Log(dirSqr);
             }
-
-        });
+        }
     }
 }

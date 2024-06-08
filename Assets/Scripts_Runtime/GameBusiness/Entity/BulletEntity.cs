@@ -18,10 +18,15 @@ public class BulletEntity : MonoBehaviour {
     }
 
     public void Move(float dt) {
-        transform.Translate(Vector3.forward * speed * dt);
-    }
+        Vector3 pos = transform.position;
+        pos += transform.forward * speed * dt;
+        transform.position = pos;
+
+    }   
 
     public void TearDown() { 
         // GameObject.Destroy(gameObject);
+          this.gameObject.SetActive(false);
+
     }
 }

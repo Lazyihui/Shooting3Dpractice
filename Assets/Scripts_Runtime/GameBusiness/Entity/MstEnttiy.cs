@@ -20,7 +20,7 @@ public class MstEntity : MonoBehaviour {
 
     public void TearDown() {
         // GameObject.Destroy(gameObject);
-          this.gameObject.SetActive(true);
+          this.gameObject.SetActive(false);
     }
 
 }
