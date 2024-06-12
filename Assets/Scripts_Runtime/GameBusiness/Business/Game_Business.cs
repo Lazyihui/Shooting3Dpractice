@@ -72,7 +72,7 @@ public static class Game_Business {
 
             }
         });
-        
+
         ctx.mstRespository.Foreach((MstEntity mst) => {
 
             RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
@@ -80,13 +80,17 @@ public static class Game_Business {
             MstDomain.Move(mst, role, dt);
         });
 
-        ctx.bulletRespository.Foreach((BulletEntity bullet) => {
+        // ctx.bulletRespository.Foreach((BulletEntity bullet) => {
+
+        int count = ctx.bulletRespository.TakeAll(out BulletEntity[] bullets);
+        for (int i = 0; i < count; i++) {
+            BulletEntity bullet = bullets[i];
 
             BulletDomain.Move(bullet, dt);
             BulletDomain.BltLapMst(ctx, bullet);
 
-
-        });
+        }
+        // });
 
 
 

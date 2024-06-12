@@ -36,6 +36,7 @@ public class BulletRespository {
         return all.TryGetValue(id, out entity);
     }
 
+
     public void Foreach(Action<BulletEntity> action) {
 
         foreach (var item in all.Values) {

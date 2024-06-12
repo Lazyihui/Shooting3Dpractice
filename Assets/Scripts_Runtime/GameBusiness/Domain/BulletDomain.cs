@@ -41,14 +41,22 @@ public static class BulletDomain {
     //     });
     // }
     public static void BltLapMst(GameContext ctx, BulletEntity blt) {
+
         int count = ctx.mstRespository.TakeAll(out MstEntity[] msts);
+
         for (int i = 0; i < count; i++) {
             MstEntity mst = msts[i];
 
-            float dirSqr = Vector2.SqrMagnitude(mst.transform.position - blt.transform.position);
+            Vector3 bPos = blt.transform.position;
+            bPos.y = 0;
+            Vector3 mPos = mst.transform.position;
+            mPos.y = 0;
+            float dirSqr = Vector3.SqrMagnitude(bPos - mPos);
             if (dirSqr < 0.1f) {
+
                 BulletDomain.Unspawn(ctx, blt);
                 MstDomain.Unpawn(ctx, mst);
+
             } else {
                 Debug.Log(dirSqr);
             }
