@@ -77,7 +77,10 @@ public static class Game_Business {
 
             RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
 
-            MstDomain.Move(mst, role, dt);
+            MstDomain.FindPath(ctx, mst, role, null);
+
+            MstDomain.MoveByPath(mst, role, dt);
+
         });
 
         // ctx.bulletRespository.Foreach((BulletEntity bullet) => {

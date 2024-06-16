@@ -16,6 +16,7 @@ public static class RoleDomain {
         RoleEntity role = GameObject.Instantiate(prefab).GetComponent<RoleEntity>();
 
         role.Ctor();
+        role.pathIndex = 0;
         role.id = ctx.roleRecordID++;
         ctx.roleRespository.Add(role);
         return role;

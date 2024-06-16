@@ -6,6 +6,12 @@ public class MstEntity : MonoBehaviour {
     public int id;
 
     public float moveSpeed;
+
+    public RectCell cell;
+
+    public Vector2Int[] path;
+
+    public int pathIndex;
     public MstEntity() {
     }
     public void Ctor() {

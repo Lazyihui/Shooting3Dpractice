@@ -6,16 +6,20 @@ public class Context {
 
     public AssetsContext assetsContext;
 
-    public ModuleInput moduleInput ;
+    public ModuleInput moduleInput;
+
+    public Function function;
 
 
     public Context() {
         assetsContext = new AssetsContext();
         gameContext = new GameContext();
-        moduleInput  = new ModuleInput();
+        moduleInput = new ModuleInput();
+        function = new Function();
     }
 
+
     public void Inject(Camera mainCamera) {
-        gameContext.Inject(assetsContext,moduleInput, mainCamera);
+        gameContext.Inject(assetsContext, moduleInput, mainCamera,function);
     }
 }

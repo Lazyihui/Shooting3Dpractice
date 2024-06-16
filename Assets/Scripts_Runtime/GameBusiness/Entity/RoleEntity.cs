@@ -11,6 +11,8 @@ public class RoleEntity : MonoBehaviour {
 
     public int id;
 
+    public int pathIndex;
+
 
     public RoleEntity() { }
     public void Ctor() { }

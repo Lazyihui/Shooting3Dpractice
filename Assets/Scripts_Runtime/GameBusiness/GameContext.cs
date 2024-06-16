@@ -26,6 +26,8 @@ public class GameContext {
 
     public Camera mainCamera;
 
+    public Function function;
+
 
     public GameContext() {
         gameEntity = new GameEntity();
@@ -33,7 +35,7 @@ public class GameContext {
         roleRespository = new RoleRespository();
         gunRespository = new GunRespository();
         bulletRespository = new BulletRespository();
-        mstRespository = new MstRespository()   ;
+        mstRespository = new MstRespository();
 
         bulletRecordID = 0;
         gunRecordID = 0;
@@ -41,9 +43,10 @@ public class GameContext {
         mstRecordID = 0;
     }
 
-    public void Inject(AssetsContext assetsContext, ModuleInput moduleInput, Camera mainCamera) {
+    public void Inject(AssetsContext assetsContext, ModuleInput moduleInput, Camera mainCamera, Function function) {
         this.assetsContext = assetsContext;
         this.moduleInput = moduleInput;
         this.mainCamera = mainCamera;
+        this.function = function;
     }
 }
