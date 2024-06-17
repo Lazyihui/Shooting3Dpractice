@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameContext {
+
+    public List<Vector2Int> hinderList;
 
     public GameEntity gameEntity;
     // === repository ===
@@ -33,7 +36,9 @@ public class GameContext {
     public Function function;
 
 
+
     public GameContext() {
+        hinderList = new List<Vector2Int>();
         gameEntity = new GameEntity();
 
         roleRespository = new RoleRespository();

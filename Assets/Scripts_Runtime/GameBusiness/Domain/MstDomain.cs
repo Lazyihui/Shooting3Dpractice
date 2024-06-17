@@ -66,7 +66,6 @@ public static class MstDomain {
         dir.z = target.y - mst.transform.position.z;
 
         if (dir.magnitude < 0.1f) {
-            
             mst.isNear = true;
 
         } else {
@@ -81,6 +80,10 @@ public static class MstDomain {
         direction.Normalize();
         Debug.Log("direction" + direction);
         mst.Move(direction, dt);
+
+        if(direction.magnitude > 0.1f) {
+            mst.isNear = false;
+        }
     }
     public static void Unpawn(GameContext ctx, MstEntity mst) {
         ctx.mstRespository.Remove(mst);

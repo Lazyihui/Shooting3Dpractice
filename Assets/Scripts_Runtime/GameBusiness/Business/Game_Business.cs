@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class Game_Business {
@@ -14,9 +15,10 @@ public static class Game_Business {
         MstEntity mst = MstDomain.Spawn(ctx);
         mst.id = ctx.gameEntity.mstRecordID;
 
-        // HinderEntity hinder = HinderDomain.Spawn(ctx, new Vector3(0, 0, 0));
+        HinderEntity hinder = HinderDomain.Spawn(ctx, new Vector3(1, 1, 1));
+        ctx.hinderList.Add(new Vector2Int(1, 1));
 
-
+        
 
     }
 
@@ -85,7 +87,7 @@ public static class Game_Business {
             for (int i = 0; i < mstLen; i++) {
                 MstEntity mst = msts[i];
                 RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
-                MstDomain.FindPath(ctx, mst, role, null);
+                MstDomain.FindPath(ctx, mst, role, ctx.hinderList);
 
                 if (!mst.isNear) {
                     MstDomain.MoveByPath(mst, role, dt);
