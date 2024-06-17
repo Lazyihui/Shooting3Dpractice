@@ -33,6 +33,7 @@ public class Function {
         if (start == end) {
             res = 1;
             result = new RectCell();
+            Debug.LogWarning("起点终点一样");
             return resultCount;
         }
 
@@ -40,19 +41,22 @@ public class Function {
         closeSet.Clear();
         closeSetKey.Clear();
 
-        if (hinders == null) {
-        } else {
+        if (hinders != null) {
             for (int i = 0; i < hinders.Count; i++) {
                 Vector2Int hind = hinders[i];
+                if (hind == start) {
+                    res = -1;
+                    result = new RectCell();
+                    return resultCount;
+                }
                 closeSetKey.Add(hind);
             }
         }
 
-
-
         RectCell startCell = new RectCell();
         startCell.Init(null, start, 0, 0);
         openSet.Add(startCell);
+        resultCount += 1;
 
         RectCell endCell = new RectCell();
 
@@ -94,6 +98,8 @@ public class Function {
             Vector2Int neighborPos = cur.position + neighbors[i];
 
             if (neighborPos == end) {
+
+
                 result = cur;
                 return 1;
             }

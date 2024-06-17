@@ -16,7 +16,7 @@ public static class MstDomain {
         MstEntity mst = GameObject.Instantiate(prefab).GetComponent<MstEntity>();
         mst.Ctor();
         mst.cell = null;
-        mst.path = new Vector2Int[100];
+        mst.path = new Vector2Int[20000];
         mst.pathIndex = 0;
         mst.moveSpeed = 0.2f;
         mst.isNear = false;
@@ -34,7 +34,11 @@ public static class MstDomain {
 
         int res;
 
-        ctx.function.Astar(start, end, hinders, 10000, out res, out mst.cell);
+        mst.pathCount = ctx.function.Astar(start, end, hinders, 10000, out res, out mst.cell);
+
+        if (res != 1) {
+            Debug.LogError("没找到" + res);
+        }
 
         if (mst.cell != null) {
             int Length = 0;
@@ -51,27 +55,39 @@ public static class MstDomain {
 
     public static void MoveByPath(MstEntity mst, RoleEntity role, float dt) {
         // 无路径
-        if (mst.path == null || mst.path.Length == 0) {
+        if (mst.path == null) {
             return;
         }
         // 到达终点
-        if (mst.pathIndex >= mst.path.Length) {
+        if (mst.pathIndex >= mst.pathCount) {
+            Debug.Log("到达终点");
             return;
         }
 
-        Vector2Int target = mst.path[mst.pathIndex];
+        if (mst.pathCount <= 1) {
+            return;
+        }
+
+        for (int i = mst.pathCount - 1; i >= 0; i -= 1) {
+            Debug.DrawLine(new Vector3(mst.path[i].x, 0, mst.path[i].y), new Vector3(mst.path[i].x, 0, mst.path[i].y) + Vector3.up * 2, Color.red);
+        }
+
+        Vector2Int target = mst.path[mst.pathCount - 3];
+        Debug.Log("target" + target);
 
         Vector3 dir = new Vector3(0, 0, 0);
         dir.x = target.x - mst.transform.position.x;
         dir.z = target.y - mst.transform.position.z;
 
         if (dir.magnitude < 0.1f) {
-            mst.isNear = true;
+            // mst.isNear = true;
 
         } else {
-            dir.Normalize();
-            mst.Move(dir, dt);
+            
+            // mst.pathIndex++;
         }
+        dir.Normalize();
+            mst.Move(dir, dt);
     }
 
     public static void Move(MstEntity mst, RoleEntity role, float dt) {
@@ -81,7 +97,7 @@ public static class MstDomain {
         Debug.Log("direction" + direction);
         mst.Move(direction, dt);
 
-        if(direction.magnitude > 0.1f) {
+        if (direction.magnitude > 0.1f) {
             mst.isNear = false;
         }
     }
