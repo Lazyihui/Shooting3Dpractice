@@ -60,48 +60,50 @@ public static class Game_Business {
 
     static void LogicFix(GameContext ctx, float dt) {
 
-        ctx.roleRespository.Foreach((RoleEntity role) => {
+        int roleLen = ctx.roleRespository.TakeAll(out RoleEntity[] roles);
+        for (int i = 0; i < roleLen; i++) {
+            RoleEntity role = roles[i];
             if (role.id == ctx.gameEntity.roleRecordID) {
-
                 RoleDomain.Move(role, ctx.moduleInput.moveAxis, 5);
                 RoleDomain.Rotate(ctx.mainCamera, role, ctx.moduleInput.mousePos, dt);
 
             }
-        });
+        }
 
-        ctx.gunRespository.Foreach((GunEntity gun) => {
+        int gunLen = ctx.gunRespository.TakeAll(out GunEntity[] guns);
+        for (int i = 0; i < gunLen; i++) {
+            GunEntity gun = guns[i];
             if (gun.id == ctx.gameEntity.gunRecordID) {
-
                 GunDomain.GunShootBlt(ctx, gun);
-
             }
-        });
+        }
 
-        ctx.mstRespository.Foreach((MstEntity mst) => {
 
-            RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
 
-            MstDomain.FindPath(ctx, mst, role, null);
+        int mstLen = ctx.mstRespository.TakeAll(out MstEntity[] msts);
+        {
+            for (int i = 0; i < mstLen; i++) {
+                MstEntity mst = msts[i];
+                RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
+                MstDomain.FindPath(ctx, mst, role, null);
 
-            if (!mst.isNear) {
-                MstDomain.MoveByPath(mst, role, dt);
-            } else {
-                MstDomain.Move(mst, role, dt);
+                if (!mst.isNear) {
+                    MstDomain.MoveByPath(mst, role, dt);
+                } else {
+                    MstDomain.Move(mst, role, dt);
+                }
             }
+        }
 
-        });
 
-        // ctx.bulletRespository.Foreach((BulletEntity bullet) => {
-
-        int count = ctx.bulletRespository.TakeAll(out BulletEntity[] bullets);
-        for (int i = 0; i < count; i++) {
+        int bltLen = ctx.bulletRespository.TakeAll(out BulletEntity[] bullets);
+        for (int i = 0; i < bltLen; i++) {
             BulletEntity bullet = bullets[i];
 
             BulletDomain.Move(bullet, dt);
             BulletDomain.BltLapMst(ctx, bullet);
 
         }
-        // });
 
 
 
