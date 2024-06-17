@@ -7,11 +7,15 @@ public static class Game_Business {
 
         RoleEntity role = RoleDomain.Spawn(ctx);
         role.id = ctx.gameEntity.roleRecordID;
+        Debug.Log("role.id:" + role.id);
         GunEntity gun = GunDomain.Spawn(ctx, role.gunPos);
         gun.id = ctx.gameEntity.gunRecordID;
 
         MstEntity mst = MstDomain.Spawn(ctx);
         mst.id = ctx.gameEntity.mstRecordID;
+
+        // HinderEntity hinder = HinderDomain.Spawn(ctx, new Vector3(0, 0, 0));
+
 
 
     }

@@ -12,6 +12,10 @@ public class GameContext {
     public BulletRespository bulletRespository;
 
     public MstRespository mstRespository;
+
+    public HinderRepository hinderRepository;
+
+    public int HinderRecordID;
     public int roleRecordID;
 
     public int gunRecordID;
@@ -36,6 +40,7 @@ public class GameContext {
         gunRespository = new GunRespository();
         bulletRespository = new BulletRespository();
         mstRespository = new MstRespository();
+        hinderRepository = new HinderRepository();
 
         bulletRecordID = 0;
         gunRecordID = 0;

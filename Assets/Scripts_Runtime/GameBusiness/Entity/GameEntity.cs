@@ -13,4 +13,7 @@ public class GameEntity {
     public int bulletRecordID;
     
     public int mstRecordID;
+
+
+    public int HinderRecordID;
 }
