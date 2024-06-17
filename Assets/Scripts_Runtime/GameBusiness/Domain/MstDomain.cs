@@ -16,9 +16,10 @@ public static class MstDomain {
         MstEntity mst = GameObject.Instantiate(prefab).GetComponent<MstEntity>();
         mst.Ctor();
         mst.cell = null;
-        mst.path = new Vector2Int[10000];
+        mst.path = new Vector2Int[100];
         mst.pathIndex = 0;
         mst.moveSpeed = 0.2f;
+        mst.isNear = false;
         mst.id = ctx.mstRecordID++;
         ctx.mstRespository.Add(mst);
 
@@ -26,13 +27,6 @@ public static class MstDomain {
 
     }
 
-    public static void Move(MstEntity mst, RoleEntity role, float dt) {
-        Vector3 direction = role.transform.position - mst.transform.position;
-
-        direction.Normalize();
-        Debug.Log("direction" + direction);
-        mst.Move(direction, dt);
-    }
 
     public static void FindPath(GameContext ctx, MstEntity mst, RoleEntity role, List<Vector2Int> hinders) {
         Vector2Int start = new Vector2Int((int)mst.transform.position.x, (int)mst.transform.position.z);
@@ -72,17 +66,22 @@ public static class MstDomain {
         dir.z = target.y - mst.transform.position.z;
 
         if (dir.magnitude < 0.1f) {
-            mst.pathIndex++;
-            return;
+            
+            mst.isNear = true;
+
         } else {
             dir.Normalize();
-            Debug.Log("dir" + dir);
             mst.Move(dir, dt);
         }
-
-
     }
 
+    public static void Move(MstEntity mst, RoleEntity role, float dt) {
+        Vector3 direction = role.transform.position - mst.transform.position;
+
+        direction.Normalize();
+        Debug.Log("direction" + direction);
+        mst.Move(direction, dt);
+    }
     public static void Unpawn(GameContext ctx, MstEntity mst) {
         ctx.mstRespository.Remove(mst);
         mst.TearDown();

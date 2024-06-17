@@ -58,7 +58,6 @@ public static class BulletDomain {
                 MstDomain.Unpawn(ctx, mst);
 
             } else {
-                Debug.Log(dirSqr);
             }
         }
     }

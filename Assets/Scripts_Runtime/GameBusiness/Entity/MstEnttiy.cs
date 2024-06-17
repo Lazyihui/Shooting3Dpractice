@@ -12,6 +12,8 @@ public class MstEntity : MonoBehaviour {
     public Vector2Int[] path;
 
     public int pathIndex;
+
+    public bool isNear;
     public MstEntity() {
     }
     public void Ctor() {

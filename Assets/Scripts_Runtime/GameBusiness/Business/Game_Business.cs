@@ -7,7 +7,7 @@ public static class Game_Business {
 
         RoleEntity role = RoleDomain.Spawn(ctx);
         role.id = ctx.gameEntity.roleRecordID;
-        Debug.Log("role.id:" + role.id);
+
         GunEntity gun = GunDomain.Spawn(ctx, role.gunPos);
         gun.id = ctx.gameEntity.gunRecordID;
 
@@ -83,7 +83,11 @@ public static class Game_Business {
 
             MstDomain.FindPath(ctx, mst, role, null);
 
-            MstDomain.MoveByPath(mst, role, dt);
+            if (!mst.isNear) {
+                MstDomain.MoveByPath(mst, role, dt);
+            } else {
+                MstDomain.Move(mst, role, dt);
+            }
 
         });
 

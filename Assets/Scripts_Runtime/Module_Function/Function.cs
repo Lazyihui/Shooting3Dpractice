@@ -94,7 +94,6 @@ public class Function {
             Vector2Int neighborPos = cur.position + neighbors[i];
 
             if (neighborPos == end) {
-                Debug.Log("找到了");
                 result = cur;
                 return 1;
             }
