@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class HinderDomain {
 
-    public static HinderEntity Spawn(GameContext ctx,  Vector3 pos) {
+    public static HinderEntity Spawn(GameContext ctx, Vector3 pos) {
 
         bool has = ctx.assetsContext.TryGetEntity("Hinder_Entity", out GameObject prefab);
         if (!has) {
@@ -21,4 +21,6 @@ public static class HinderDomain {
         ctx.hinderRepository.Add(entity);
         return entity;
     }
+
+
 }

@@ -5,18 +5,23 @@ using UnityEngine;
 public static class Game_Business {
 
     public static void New_Game(GameContext ctx) {
-
+        // role
         RoleEntity role = RoleDomain.Spawn(ctx);
         role.id = ctx.gameEntity.roleRecordID;
-
+        
+        //gun
         GunEntity gun = GunDomain.Spawn(ctx, role.gunPos);
         gun.id = ctx.gameEntity.gunRecordID;
-
+        
+        // mst
         MstEntity mst = MstDomain.Spawn(ctx);
         mst.id = ctx.gameEntity.mstRecordID;
 
+        //hinder 
         HinderEntity hinder = HinderDomain.Spawn(ctx, new Vector3(1, 0, 1));
-        ctx.hinderList.Add(new Vector2Int(1, 1));
+        // 添加坐标到阻挡列表
+        ctx.hinderList.Add(hinder.logicPos);
+
 
 
     }
@@ -83,7 +88,7 @@ public static class Game_Business {
 
         int mstLen = ctx.mstRespository.TakeAll(out MstEntity[] msts);
         {
-                RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
+            RoleEntity role = ctx.roleRespository.TryGet(ctx.gameEntity.roleRecordID, out RoleEntity roleEntity) ? roleEntity : null;
             for (int i = 0; i < mstLen; i++) {
                 MstEntity mst = msts[i];
                 MstDomain.FindPath(ctx, mst, role, ctx.hinderList);

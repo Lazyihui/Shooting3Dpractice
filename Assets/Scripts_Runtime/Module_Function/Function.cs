@@ -33,7 +33,6 @@ public class Function {
         if (start == end) {
             res = 1;
             result = new RectCell();
-            Debug.LogWarning("起点终点一样");
             return resultCount;
         }
 
