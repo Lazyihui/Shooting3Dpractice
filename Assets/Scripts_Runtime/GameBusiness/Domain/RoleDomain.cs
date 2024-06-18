@@ -18,6 +18,7 @@ public static class RoleDomain {
         role.Ctor();
         role.pathIndex = 0;
         role.id = ctx.roleRecordID++;
+        role.SetPos(new Vector3(0, 0, 0));
         ctx.roleRespository.Add(role);
         return role;
 

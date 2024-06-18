@@ -15,12 +15,12 @@ public static class MstDomain {
 
         MstEntity mst = GameObject.Instantiate(prefab).GetComponent<MstEntity>();
         mst.Ctor();
-        mst.cell = null;
         mst.path = new Vector2Int[20000];
         mst.pathIndex = 0;
-        mst.moveSpeed = 0.2f;
+        mst.moveSpeed = 3f;
         mst.isNear = false;
         mst.id = ctx.mstRecordID++;
+        mst.SetPos(new Vector3(-5, 0, 1));
         ctx.mstRespository.Add(mst);
 
         return mst;
@@ -29,20 +29,19 @@ public static class MstDomain {
 
 
     public static void FindPath(GameContext ctx, MstEntity mst, RoleEntity role, List<Vector2Int> hinders) {
-        Vector2Int start = new Vector2Int((int)mst.transform.position.x, (int)mst.transform.position.z);
+        Vector2Int start = mst.logicPos;
         Vector2Int end = new Vector2Int((int)role.transform.position.x, (int)role.transform.position.z);
 
-        int res;
-
-        mst.pathCount = ctx.function.Astar(start, end, hinders, 10000, out res, out mst.cell);
+        mst.pathCount = ctx.function.Astar(start, end, hinders, 10000, out int res, out RectCell cell);
 
         if (res != 1) {
             Debug.LogError("没找到" + res);
+            return;
         }
 
-        if (mst.cell != null) {
+        if (cell != null) {
             int Length = 0;
-            RectCell cur = mst.cell;
+            RectCell cur = cell;
             while (cur != null) {
                 mst.path[Length++] = cur.position;
                 cur = cur.parent;
@@ -60,7 +59,6 @@ public static class MstDomain {
         }
         // 到达终点
         if (mst.pathIndex >= mst.pathCount) {
-            Debug.Log("到达终点");
             return;
         }
 
@@ -69,25 +67,25 @@ public static class MstDomain {
         }
 
         for (int i = mst.pathCount - 1; i >= 0; i -= 1) {
-            Debug.DrawLine(new Vector3(mst.path[i].x, 0, mst.path[i].y), new Vector3(mst.path[i].x, 0, mst.path[i].y) + Vector3.up * 2, Color.red);
+            Vector2Int path = mst.path[i];
+            Debug.DrawLine(new Vector3(path.x, 0, path.y), new Vector3(path.x, 0, path.y) + Vector3.up * 2, Color.red);
         }
 
-        Vector2Int target = mst.path[mst.pathCount - 3];
-        Debug.Log("target" + target);
+        Vector2Int target = mst.path[mst.pathCount - 2];
 
         Vector3 dir = new Vector3(0, 0, 0);
         dir.x = target.x - mst.transform.position.x;
         dir.z = target.y - mst.transform.position.z;
 
-        if (dir.magnitude < 0.1f) {
+        if (dir.magnitude < mst.moveSpeed * dt) {
             // mst.isNear = true;
-
+            mst.logicPos = target;
+            mst.transform.position = new Vector3(target.x, mst.transform.position.y, target.y);
         } else {
-            
+            dir.Normalize();
+            mst.Move(dir, dt);
             // mst.pathIndex++;
         }
-        dir.Normalize();
-            mst.Move(dir, dt);
     }
 
     public static void Move(MstEntity mst, RoleEntity role, float dt) {

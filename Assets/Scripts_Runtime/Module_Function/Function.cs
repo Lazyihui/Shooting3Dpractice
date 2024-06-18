@@ -48,6 +48,10 @@ public class Function {
                     res = -1;
                     result = new RectCell();
                     return resultCount;
+                } else if (hind == end) {
+                    res = -1;
+                    result = new RectCell();
+                    return resultCount;
                 }
                 closeSetKey.Add(hind);
             }
@@ -56,7 +60,6 @@ public class Function {
         RectCell startCell = new RectCell();
         startCell.Init(null, start, 0, 0);
         openSet.Add(startCell);
-        resultCount += 1;
 
         RectCell endCell = new RectCell();
 
@@ -72,9 +75,9 @@ public class Function {
 
         result = endCell;
         if (res == -1) {
-            Debug.Log("死路结束");
+            Debug.LogError("死路结束");
         } else if (res == -2) {
-            Debug.Log("超出边界");
+            Debug.LogError("超出边界");
         }
 
 
@@ -98,9 +101,14 @@ public class Function {
             Vector2Int neighborPos = cur.position + neighbors[i];
 
             if (neighborPos == end) {
+                RectCell tem = new RectCell();
+                tem.parent = cur;
+                tem.position = end;
+                tem.hCost = 0;
+                tem.gCost = 0;
+                tem.fCost = 0;
 
-
-                result = cur;
+                result = tem;
                 return 1;
             }
 
