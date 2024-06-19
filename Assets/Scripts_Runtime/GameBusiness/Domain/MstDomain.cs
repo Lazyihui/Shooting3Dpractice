@@ -32,30 +32,30 @@ public static class MstDomain {
     static void OnCollisionEnter(MstEntity mst, Collision other) {
         if (other.gameObject.CompareTag("role")) {
             mst.isCollide = true;
-            Debug.Log("碰撞了" + mst.id + " " + other.gameObject.name);
         }
 
     }
     public static void Move(MstEntity mst, RoleEntity role, float dt) {
-        Vector3 dir = mst.transform.position - role.transform.position;
-
-        dir.Normalize();
-
 
         if (mst.isCollide) {
+            Debug.Log("碰撞了");
+
             ReverseMove(mst, role);
-        } else {
-            MoveByPath(mst, role, dt);
+
+            mst.isCollide = false;
         }
+        MoveByPath(mst, role, dt);
+
+
     }
 
 
     static void ReverseMove(MstEntity mst, RoleEntity role) {
 
         Vector3 dir = mst.transform.position - role.transform.position;
+
         dir.Normalize();
         mst.RevervseMove(dir);
-        mst.isCollide = false;
     }
 
 
@@ -114,6 +114,7 @@ public static class MstDomain {
             // mst.isNear = true;
             mst.logicPos = target;
             mst.transform.position = new Vector3(target.x, mst.transform.position.y, target.y);
+            MoveTotargets(mst, role, dt);
         } else {
             dir.Normalize();
             mst.Move(dir, dt);
@@ -121,14 +122,14 @@ public static class MstDomain {
         }
     }
 
-    // public static void Move(MstEntity mst, RoleEntity role, float dt) {
-    //     Vector3 direction = role.transform.position - mst.transform.position;
+    static void MoveTotargets(MstEntity mst, RoleEntity role, float dt) {
+        Vector3 direction = role.transform.position - mst.transform.position;
 
-    //     direction.Normalize();
-    //     Debug.Log("direction" + direction);
-    //     mst.Move(direction, dt);
+        direction.Normalize();
+        Debug.Log("direction" + direction);
+        mst.Move(direction, dt);
 
-    // }
+    }
     public static void Unpawn(GameContext ctx, MstEntity mst) {
         ctx.mstRespository.Remove(mst);
         mst.TearDown();
