@@ -104,7 +104,8 @@ MonoBehaviour:
   logicPos: {x: 0, y: 0}
   pathIndex: 0
   pathCount: 0
-  isNear: 0
+  isCollide: 0
+  collideTime: 0
 --- !u!1 &8850802989343688023
 GameObject:
   m_ObjectHideFlags: 0

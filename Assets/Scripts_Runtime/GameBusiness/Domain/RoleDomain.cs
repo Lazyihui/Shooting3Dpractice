@@ -19,11 +19,19 @@ public static class RoleDomain {
         role.pathIndex = 0;
         role.id = ctx.roleRecordID++;
         role.SetPos(new Vector3(0, 0, 0));
+
         ctx.roleRespository.Add(role);
         return role;
 
     }
 
+    static void OnCollisionEnter(RoleEntity role, Collision other) {
+        if (other.gameObject.CompareTag("mst")) {
+            
+        
+        }
+
+    }
     public static void Move(RoleEntity role, Vector2 moveAxis, float speed) {
         role.Move(moveAxis, speed);
     }

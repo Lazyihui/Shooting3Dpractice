@@ -22,7 +22,7 @@ public class MstEntity : MonoBehaviour {
 
     public float collideTime;
 
-    
+    public Action<MstEntity, Collision> OnCollisionEnterHandle;
 
     public MstEntity() {
     }
@@ -45,9 +45,18 @@ public class MstEntity : MonoBehaviour {
 
     }
 
+    public void RevervseMove(Vector3 direction) {
+
+        rb.velocity = direction * 1f;
+    }
+
     public void TearDown() {
         // GameObject.Destroy(gameObject);
         this.gameObject.SetActive(false);
+    }
+
+    public void OnCollisionEnter(Collision other) {
+        OnCollisionEnterHandle.Invoke(this, other);
     }
 
 }

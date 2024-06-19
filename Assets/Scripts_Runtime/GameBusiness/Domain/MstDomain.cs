@@ -20,6 +20,7 @@ public static class MstDomain {
         mst.moveSpeed = 3f;
         mst.id = ctx.mstRecordID++;
         mst.isCollide = false;
+        mst.OnCollisionEnterHandle = OnCollisionEnter;
         mst.SetPos(new Vector3(-5, 0, 1));
         ctx.mstRespository.Add(mst);
 
@@ -27,6 +28,14 @@ public static class MstDomain {
 
     }
 
+
+    static void OnCollisionEnter(MstEntity mst, Collision other) {
+        if (other.gameObject.CompareTag("role")) {
+            mst.isCollide = true;
+            Debug.Log("碰撞了" + mst.id + " " + other.gameObject.name);
+        }
+
+    }
     public static void Move(MstEntity mst, RoleEntity role, float dt) {
         Vector3 dir = mst.transform.position - role.transform.position;
 
@@ -34,19 +43,19 @@ public static class MstDomain {
 
 
         if (mst.isCollide) {
-            ReverseMove(mst, role, dt);
+            ReverseMove(mst, role);
         } else {
             MoveByPath(mst, role, dt);
         }
     }
 
 
-    static void ReverseMove(MstEntity mst, RoleEntity role, float dt) {
+    static void ReverseMove(MstEntity mst, RoleEntity role) {
 
         Vector3 dir = mst.transform.position - role.transform.position;
         dir.Normalize();
-        mst.Move(dir, dt);
-
+        mst.RevervseMove(dir);
+        mst.isCollide = false;
     }
 
 
