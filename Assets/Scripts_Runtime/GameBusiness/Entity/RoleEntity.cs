@@ -35,16 +35,7 @@ public class RoleEntity : MonoBehaviour {
         velo = moveDir * speed;
         velo.y = oldY;
         rb.velocity = velo;
+
     }
 
-    // public void Rotate(Vector3 rotateAxis, float dt) {
-    //     if (rotateAxis == Vector3.zero) {
-    //         return;
-    //     }
-    //     Quaternion rot = Quaternion.LookRotation(rotateAxis);
-    //     // Debug.Log("rot:" + rot);
-    //     // 只需要y轴旋转
-    //     transform.rotation = Quaternion.Slerp(transform.rotation, rot, dt);
-
-    // }
 }

@@ -16,7 +16,14 @@ public class MstEntity : MonoBehaviour {
     public int pathIndex;
     public int pathCount;
 
-    public bool isNear;
+    // 碰撞返回的信息
+
+    public bool isCollide;
+
+    public float collideTime;
+
+    
+
     public MstEntity() {
     }
     public void Ctor() {
@@ -40,7 +47,7 @@ public class MstEntity : MonoBehaviour {
 
     public void TearDown() {
         // GameObject.Destroy(gameObject);
-          this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
 }

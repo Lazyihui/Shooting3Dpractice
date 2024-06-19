@@ -92,7 +92,7 @@ public static class Game_Business {
             for (int i = 0; i < mstLen; i++) {
                 MstEntity mst = msts[i];
                 MstDomain.FindPath(ctx, mst, role, ctx.hinderList);
-                MstDomain.MoveByPath(mst, role, dt);
+                MstDomain.Move(mst, role, dt);
             }
         }
 

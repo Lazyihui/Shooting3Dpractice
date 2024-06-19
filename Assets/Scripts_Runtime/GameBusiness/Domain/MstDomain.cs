@@ -18,14 +18,37 @@ public static class MstDomain {
         mst.path = new Vector2Int[20000];
         mst.pathIndex = 0;
         mst.moveSpeed = 3f;
-        mst.isNear = false;
         mst.id = ctx.mstRecordID++;
+        mst.isCollide = false;
         mst.SetPos(new Vector3(-5, 0, 1));
         ctx.mstRespository.Add(mst);
 
         return mst;
 
     }
+
+    public static void Move(MstEntity mst, RoleEntity role, float dt) {
+        Vector3 dir = mst.transform.position - role.transform.position;
+
+        dir.Normalize();
+
+
+        if (mst.isCollide) {
+            ReverseMove(mst, role, dt);
+        } else {
+            MoveByPath(mst, role, dt);
+        }
+    }
+
+
+    static void ReverseMove(MstEntity mst, RoleEntity role, float dt) {
+
+        Vector3 dir = mst.transform.position - role.transform.position;
+        dir.Normalize();
+        mst.Move(dir, dt);
+
+    }
+
 
 
     public static void FindPath(GameContext ctx, MstEntity mst, RoleEntity role, List<Vector2Int> hinders) {
@@ -52,7 +75,7 @@ public static class MstDomain {
 
 
 
-    public static void MoveByPath(MstEntity mst, RoleEntity role, float dt) {
+    static void MoveByPath(MstEntity mst, RoleEntity role, float dt) {
         // 无路径
         if (mst.path == null) {
             return;
@@ -77,6 +100,7 @@ public static class MstDomain {
         dir.x = target.x - mst.transform.position.x;
         dir.z = target.y - mst.transform.position.z;
 
+        // x新的写法
         if (dir.magnitude < mst.moveSpeed * dt) {
             // mst.isNear = true;
             mst.logicPos = target;
@@ -88,17 +112,14 @@ public static class MstDomain {
         }
     }
 
-    public static void Move(MstEntity mst, RoleEntity role, float dt) {
-        Vector3 direction = role.transform.position - mst.transform.position;
+    // public static void Move(MstEntity mst, RoleEntity role, float dt) {
+    //     Vector3 direction = role.transform.position - mst.transform.position;
 
-        direction.Normalize();
-        Debug.Log("direction" + direction);
-        mst.Move(direction, dt);
+    //     direction.Normalize();
+    //     Debug.Log("direction" + direction);
+    //     mst.Move(direction, dt);
 
-        if (direction.magnitude > 0.1f) {
-            mst.isNear = false;
-        }
-    }
+    // }
     public static void Unpawn(GameContext ctx, MstEntity mst) {
         ctx.mstRespository.Remove(mst);
         mst.TearDown();
