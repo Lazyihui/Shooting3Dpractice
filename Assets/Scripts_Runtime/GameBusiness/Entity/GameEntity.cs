@@ -8,15 +8,25 @@ public class GameEntity {
 
     public int roleRecordID;
 
-    public int  gunRecordID;
+    public int gunRecordID;
 
     public int bulletRecordID;
-    
+
     public int mstRecordID;
 
 
     public int HinderRecordID;
 
     public List<Vector2Int> hinderPos;
+
+    public List<Vector2Int> mstPos;
+
+    public GameEntity() { }
+    public void Ctor() { 
+        
+        mstPos = new List<Vector2Int>(20);
+
+    }
+
 
 }

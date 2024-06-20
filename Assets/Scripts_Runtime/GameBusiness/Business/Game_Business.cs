@@ -5,6 +5,10 @@ using UnityEngine;
 public static class Game_Business {
 
     public static void New_Game(GameContext ctx) {
+        // Game
+        GameDomaim.Init(ctx);   
+
+
         // role
         RoleEntity role = RoleDomain.Spawn(ctx);
         role.id = ctx.gameEntity.roleRecordID;
@@ -23,12 +27,13 @@ public static class Game_Business {
         // 添加坐标到阻挡列表
         // ctx.hinderList.Add(hinder.logicPos);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             Vector2Int pos = new Vector2Int(UnityEngine.Random.Range(-4, 4), UnityEngine.Random.Range(-4, 4));
             ctx.hinderList.Add(pos);
             Vector3 hinderPos = new Vector3(pos.x, 0, pos.y);
             HinderEntity hinder = HinderDomain.Spawn(ctx, hinderPos);
         }
+
 
 
 
@@ -113,6 +118,8 @@ public static class Game_Business {
             BulletDomain.BltLapMst(ctx, bullet);
 
         }
+
+        // 间隔生成怪物
 
 
 
