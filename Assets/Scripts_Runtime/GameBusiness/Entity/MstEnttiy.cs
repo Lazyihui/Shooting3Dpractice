@@ -46,9 +46,7 @@ public class MstEntity : MonoBehaviour {
     }
 
     public void RevervseMove(Vector3 direction) {
-        Debug.Log("前" + this.rb.velocity);
         rb.velocity = direction * 5f;
-        Debug.Log("后" + this.rb.velocity);
 
     }
 

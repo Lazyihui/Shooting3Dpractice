@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameContext {
 
+    
     public List<Vector2Int> hinderList;
 
     public GameEntity gameEntity;

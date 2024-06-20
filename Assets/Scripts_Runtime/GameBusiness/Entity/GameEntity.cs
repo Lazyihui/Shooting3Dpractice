@@ -1,5 +1,5 @@
-
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameEntity {
@@ -16,4 +16,7 @@ public class GameEntity {
 
 
     public int HinderRecordID;
+
+    public List<Vector2Int> hinderPos;
+
 }

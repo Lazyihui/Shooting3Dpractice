@@ -8,19 +8,27 @@ public static class Game_Business {
         // role
         RoleEntity role = RoleDomain.Spawn(ctx);
         role.id = ctx.gameEntity.roleRecordID;
-        
+
         //gun
         GunEntity gun = GunDomain.Spawn(ctx, role.gunPos);
         gun.id = ctx.gameEntity.gunRecordID;
-        
+
         // mst
         MstEntity mst = MstDomain.Spawn(ctx);
         mst.id = ctx.gameEntity.mstRecordID;
 
         //hinder 
-        HinderEntity hinder = HinderDomain.Spawn(ctx, new Vector3(1, 0, 1));
+        // 要得到随机的hinder位置 （0，0，0）位置不可以
+        // HinderEntity hinder = HinderDomain.Spawn(ctx, new Vector3(1, 0, 1));
         // 添加坐标到阻挡列表
-        ctx.hinderList.Add(hinder.logicPos);
+        // ctx.hinderList.Add(hinder.logicPos);
+
+        for (int i = 0; i < 10; i++) {
+            Vector2Int pos = new Vector2Int(UnityEngine.Random.Range(-4, 4), UnityEngine.Random.Range(-4, 4));
+            ctx.hinderList.Add(pos);
+            Vector3 hinderPos = new Vector3(pos.x, 0, pos.y);
+            HinderEntity hinder = HinderDomain.Spawn(ctx, hinderPos);
+        }
 
 
 

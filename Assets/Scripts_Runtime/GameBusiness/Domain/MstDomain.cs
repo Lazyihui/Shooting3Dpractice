@@ -126,7 +126,6 @@ public static class MstDomain {
         Vector3 direction = role.transform.position - mst.transform.position;
 
         direction.Normalize();
-        Debug.Log("direction" + direction);
         mst.Move(direction, dt);
 
     }
