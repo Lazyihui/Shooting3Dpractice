@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class MstDomain {
-    public static MstEntity Spawn(GameContext ctx) {
+    public static MstEntity Spawn(GameContext ctx, Vector2Int pos) {
 
 
         bool has = ctx.assetsContext.TryGetEntity("Mst_Entity", out GameObject prefab);
@@ -21,13 +21,29 @@ public static class MstDomain {
         mst.id = ctx.mstRecordID++;
         mst.isCollide = false;
         mst.OnCollisionEnterHandle = OnCollisionEnter;
-        mst.SetPos(new Vector3(-5, 0, 1));
+        mst.SetPos(new Vector3(pos.x, 0, pos.y));
         ctx.mstRespository.Add(mst);
 
         return mst;
 
     }
 
+
+    public static void SpawnMstTimer(GameContext ctx, float dt) {
+
+        ctx.gameEntity.mstSpawnTimer += dt;
+        float interval = 10;
+
+        Debug.Log(ctx.gameEntity.mstSpawnTimer);
+        if (ctx.gameEntity.mstSpawnTimer >= interval) {
+            Vector2Int pos = ctx.gameEntity.mstPos[UnityEngine.Random.Range(0, ctx.gameEntity.mstPos.Count)];
+
+            MstEntity mst = Spawn(ctx, pos);
+
+            ctx.gameEntity.mstSpawnTimer = 0;
+        }
+
+    }
 
     static void OnCollisionEnter(MstEntity mst, Collision other) {
         if (other.gameObject.CompareTag("role")) {

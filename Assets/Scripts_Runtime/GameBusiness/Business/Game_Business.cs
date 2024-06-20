@@ -6,7 +6,7 @@ public static class Game_Business {
 
     public static void New_Game(GameContext ctx) {
         // Game
-        GameDomaim.Init(ctx);   
+        GameDomaim.Init(ctx);
 
 
         // role
@@ -18,8 +18,8 @@ public static class Game_Business {
         gun.id = ctx.gameEntity.gunRecordID;
 
         // mst
-        MstEntity mst = MstDomain.Spawn(ctx);
-        mst.id = ctx.gameEntity.mstRecordID;
+        // MstEntity mst = MstDomain.Spawn(ctx);
+        // mst.id = ctx.gameEntity.mstRecordID;
 
         //hinder 
         // 要得到随机的hinder位置 （0，0，0）位置不可以
@@ -120,7 +120,7 @@ public static class Game_Business {
         }
 
         // 间隔生成怪物
-
+        MstDomain.SpawnMstTimer(ctx, dt);
 
 
     }

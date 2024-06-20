@@ -21,6 +21,10 @@ public class GameEntity {
 
     public List<Vector2Int> mstPos;
 
+    public float mstSpawnTimer;
+
+    public float mstSpawnInterval;
+
     public GameEntity() { }
     public void Ctor() { 
         
