@@ -34,6 +34,8 @@ public static class Game_Business {
             HinderEntity hinder = HinderDomain.Spawn(ctx, hinderPos);
         }
 
+        // MstDomain.Spawn(ctx, new Vector3(5, 0, 1));
+        // MstDomain.Spawn(ctx, new Vector3(5, 0, 2));
 
 
 

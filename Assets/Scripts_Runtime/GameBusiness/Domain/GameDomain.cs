@@ -18,15 +18,15 @@ public static class GameDomaim {
     
     
     static void MstPosInit(GameContext ctx) {
-        List<Vector2Int> mstPos = new List<Vector2Int> {
-            new Vector2Int (-1,-3),
-            new Vector2Int (2,-4),
-            new Vector2Int (4,3),
-            new Vector2Int (1,3),
-            new Vector2Int (-3,2),
-            new Vector2Int (-4,-1),
-            new Vector2Int (3,-1),
-            new Vector2Int (3,-3),
+        List<Vector3> mstPos = new List<Vector3> {
+            new Vector3 (-1.5f,0,-3.5f),
+            new Vector3 (2.5f,0,-4.5f),
+            new Vector3 (4.5f,0,3.5f),
+            new Vector3 (1.5f,0,3.5f),
+            new Vector3 (-3.5f,0,2.5f),
+            new Vector3 (-4.5f,0,-1.5f),
+            new Vector3 (3.5f,0,-1.5f),
+            new Vector3 (3.5f,0,-3.5f),
         };
 
         ctx.gameEntity.mstPos = mstPos;

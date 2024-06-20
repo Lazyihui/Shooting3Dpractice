@@ -19,7 +19,7 @@ public class GameEntity {
 
     public List<Vector2Int> hinderPos;
 
-    public List<Vector2Int> mstPos;
+    public List<Vector3> mstPos;
 
     public float mstSpawnTimer;
 
@@ -28,7 +28,7 @@ public class GameEntity {
     public GameEntity() { }
     public void Ctor() { 
         
-        mstPos = new List<Vector2Int>(20);
+        mstPos = new List<Vector3>(20);
 
     }
 
