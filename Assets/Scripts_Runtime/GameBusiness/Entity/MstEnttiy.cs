@@ -34,6 +34,7 @@ public class MstEntity : MonoBehaviour {
         logicPos = new Vector2Int((int)pos.x, (int)pos.z);
     }
 
+
     public void Move(Vector3 direction, float dt) {
 
         // 按照格子移动

@@ -31,7 +31,7 @@ public static class Game_Business {
             Vector2Int pos = new Vector2Int(UnityEngine.Random.Range(-4, 4), UnityEngine.Random.Range(-4, 4));
             ctx.hinderList.Add(pos);
             Vector3 hinderPos = new Vector3(pos.x, 0, pos.y);
-            HinderEntity hinder = HinderDomain.Spawn(ctx, hinderPos);
+            // HinderEntity hinder = HinderDomain.Spawn(ctx, hinderPos);
         }
 
         // MstDomain.Spawn(ctx, new Vector3(5, 0, 1));

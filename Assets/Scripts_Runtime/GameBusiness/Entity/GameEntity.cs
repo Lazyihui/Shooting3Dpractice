@@ -21,13 +21,16 @@ public class GameEntity {
 
     public List<Vector3> mstPos;
 
+    public int[] mstPosIndex;
+
+
     public float mstSpawnTimer;
 
     public float mstSpawnInterval;
 
     public GameEntity() { }
-    public void Ctor() { 
-        
+    public void Ctor() {
+
         mstPos = new List<Vector3>(20);
 
     }

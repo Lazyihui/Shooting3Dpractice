@@ -21,7 +21,7 @@ public static class MstDomain {
         mst.id = ctx.mstRecordID++;
         mst.isCollide = false;
         mst.OnCollisionEnterHandle = OnCollisionEnter;
-        mst.SetPos(new Vector3(pos.x, 0, pos.y));
+        mst.SetPos(pos);
         ctx.mstRespository.Add(mst);
 
         return mst;
@@ -34,12 +34,15 @@ public static class MstDomain {
         ctx.gameEntity.mstSpawnTimer += dt;
         float interval = 10;
 
-        Debug.Log(ctx.gameEntity.mstSpawnTimer);
         if (ctx.gameEntity.mstSpawnTimer >= interval) {
 
-            Vector3 pos = ctx.gameEntity.mstPos[UnityEngine.Random.Range(0, ctx.gameEntity.mstPos.Count)];
+            Common.RandomArray(ctx.gameEntity.mstPosIndex);
 
+            Debug.Log(ctx.gameEntity.mstPosIndex[0]);
+            Vector3 pos = ctx.gameEntity.mstPos[ctx.gameEntity.mstPosIndex[0]];
+            Debug.Log(pos);
             MstEntity mst = Spawn(ctx, pos);
+            Debug.Log(mst.transform.position);
 
             ctx.gameEntity.mstSpawnTimer = 0;
         }
@@ -55,7 +58,6 @@ public static class MstDomain {
     public static void Move(MstEntity mst, RoleEntity role, float dt) {
 
         if (mst.isCollide) {
-            Debug.Log("碰撞了");
 
             ReverseMove(mst, role);
 
