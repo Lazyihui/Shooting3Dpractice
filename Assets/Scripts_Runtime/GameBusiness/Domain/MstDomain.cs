@@ -32,18 +32,14 @@ public static class MstDomain {
     public static void SpawnMstTimer(GameContext ctx, float dt) {
 
         ctx.gameEntity.mstSpawnTimer += dt;
-        float interval = 10;
+        float interval = 20;
 
         if (ctx.gameEntity.mstSpawnTimer >= interval) {
 
             Common.RandomArray(ctx.gameEntity.mstPosIndex);
 
-            Debug.Log(ctx.gameEntity.mstPosIndex[0]);
             Vector3 pos = ctx.gameEntity.mstPos[ctx.gameEntity.mstPosIndex[0]];
-            Debug.Log(pos);
             MstEntity mst = Spawn(ctx, pos);
-            Debug.Log(mst.transform.position);
-
             ctx.gameEntity.mstSpawnTimer = 0;
         }
 

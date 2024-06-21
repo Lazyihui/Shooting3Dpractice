@@ -9,7 +9,6 @@ public static class GameDomaim {
 
         ctx.gameEntity.Ctor();
         ctx.gameEntity.mstSpawnTimer = 0;
-        ctx.gameEntity.mstSpawnInterval = 3;
 
         MstPosInit(ctx);
 

@@ -20,7 +20,6 @@ public class MstEntity : MonoBehaviour {
 
     public bool isCollide;
 
-    public float collideTime;
 
     public Action<MstEntity, Collision> OnCollisionEnterHandle;
 
